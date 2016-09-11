@@ -1,0 +1,59 @@
+{% extends "roots/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="page-center">
+		<h1>Welcome</h1>
+	</div>
+
+    {% if index %}
+        {% for i in index %}
+            {% if i.key != "rootpass" %}
+            <article id="a_{{i.key}}" class="post clearfix boder">
+                <span class="post-title">
+                    {{i.key}}<input type="text" name="{{i.key}}" value="{{i.value}}" />
+                    <button type="button" onclick="changeConfig('{{i.key}}')">修改</button>
+                    <button type="button" onclick="delConfig('{{i.key}}')">刪除</button>
+                </span>
+            </article>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <article class="post clearfix boder">
+        <span class="post-title">
+            <input type="text" name="newkey" value="" />
+            <input type="text" name="newvalue" value="" />
+            <button type="button" onclick="addConfig()">新增</button>
+        </span>
+    </article>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function postConfig(k, v){
+        $.post('/roots/setting.vir', { "key": k, "value": v },
+            function (text, status) {
+                console.log(text);
+                if(text == "1") location.reload();
+            });
+    }
+    function changeConfig(key){
+        postConfig(key, $('input[name='+key+']').val());
+    }
+    function addConfig(){
+        postConfig($('input[name=newkey]').val(), $('input[name=newvalue]').val());
+    }
+    function delConfig(key){
+        $.post('/roots/setting.vir', { "del": key },
+            function (text, status) {
+                console.log(text);
+                if(text == "1") $('#a_'+key).remove();
+            });
+    }
+</script>
+{% endblock %}

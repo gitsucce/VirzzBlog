@@ -1,0 +1,26 @@
+{% extends "roots/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="page-center">
+		<h1>{% if index %}修改友鏈{% else %}添加友鏈{% endif %}</h1>
+	</div>
+
+	<article class="post clearfix boder">
+		<span class="post-title">
+			<form action="" method=post>
+				Title : <input type="text" name="title" value="{% if index %}{{index.title}}{% endif %}" />(標題)<br /><br />
+				Href : <input type="text" name="href"  value="{% if index %}{{index.href}}{% endif %}"/>(地址)<br /><br />
+				Count : <input type="text" name="count"  value="{% if index %}{{index.count}}{% endif %}"/>(點擊數)<br /><br />
+				<input type="submit" value="Submit">
+			</form>
+		</span>
+	</article>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

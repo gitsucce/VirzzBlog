@@ -1,0 +1,31 @@
+{% extends "roots/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="page-center">
+		<h1>友鏈列表</h1>
+	</div>
+
+	{% for i in index %}
+	<article class="post clearfix boder">
+		<span class="post-title">
+			{{ i.title }} 
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			{{ i.href }} 
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			{{ i.count }} 
+			<br />
+			<a href="/roots/links/{{i.id}}/change.vir"> Change </a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/roots/links/{{i.id}}/delete.vir"> Delete </a>
+		</span>
+	</article>
+	{% endfor %}
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "roots/base.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/simplemde.min.css">
+<style>
+	.page-inner {
+	    max-width: 1400px;
+	}
+	.markdown-section * {
+	    box-sizing: border-box;
+	    font-size:100%;
+	}
+	input, select {
+		width: 100%;
+	    font-size: 2em;
+	    font-weight: bold;
+	}
+	input[type="text"], select {
+	    background: #fff none repeat scroll 0 0;
+	    border: 1px solid #d9d9d6;
+	    border-radius: 2px;
+	    box-sizing: border-box;
+	    padding: 7px;
+	}
+	input[type="submit"] {
+	    background-color: #467b96;
+        border: medium none;
+        border-radius: 2px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        height: 32px;
+        padding: 0 12px;
+        vertical-align: middle;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="page-center">
+		<h1>{% if index %}編輯文章{% else %}添加文章{% endif %}</h1>
+	</div>
+	<article class="post clearfix boder">
+		<form action="" method=post>
+			標題 : 	<input type="text" name="title" value="{% if index %}{{index.title}}{% endif %}" /><br />
+			路由 : 	<input type="text" name="route" value="{% if index %}{{index.route}}{% endif %}" /><br />
+			分類 : 	<select name="cid">
+						{% for c in categorys %}
+						<option value ="{{c.id}}" {% if c.id == index.cid %}selected{% endif %}>{{c.name}}</option>
+						{% endfor %}
+						</select><br />
+			內容 : <textarea id="textarea">{% if index %}{{index.content}}{% endif %}</textarea>
+			<input type="submit" value="Submit">
+			<input type="hidden" name="content"/>
+		</form>
+	</article>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/simplemde.min.js"></script>
+<script src="/static/js/pinyin.js"></script>
+<script>
+	var input = $("input[name=content]");
+	var route = $("input[name=route]");
+	var title = $("input[name=title]");
+	var simplemde = new SimpleMDE();
+	simplemde.value($("#textarea").text());
+	input.val(simplemde.value());
+	simplemde.codemirror.on("change", function(){
+		input.val(simplemde.value());
+	});
+	title.bind('input propertychange', function() { 
+		route.val(ConvertPinyin(title.val()));
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "roots/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="page-center">
+		<h1>{% if index %}修改分類{% else %}添加分類{% endif %}</h1>
+	</div>
+
+	<article class="post clearfix boder">
+		<span class="post-title">
+			<form action="" method=post>
+				Name : <input type="text" name="name" value="{% if index %}{{index.name}}{% endif %}" />(名称)<br />
+				Route : <input type="text" name="route"  value="{% if index %}{{index.route}}{% endif %}"/>(路由)<br />
+				Pid : <input type="text" name="pid"  value="{% if index %}{{index.pid}}{% endif %}"/>(级别)<br />
+				Mid : <input type="text" name="mid"  value="{% if index %}{{index.mid}}{% endif %}"/>(顺序)<br />
+				<input type="submit" value="Submit">
+			</form>
+		</span>
+	</article>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

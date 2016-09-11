@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+  
+  {% if atitle %}
+  <div class="page-center">
+    <h1>《{{ atitle }}》</h1>
+  </div>
+  {% endif %}
+
+  <article class="post clearfix">
+    <div class="post-content">
+      {% filter markdown %}{{ post.content |safe}}{% endfilter %}
+      <br />
+      轉載請保留版權！
+      <br />
+      本文轉自：<a title="{{ post.title }}" href="{{config['HOST']}}/{{ post.route }}.html">{{config['HOST']}}/{{ post.route }}.html</a> 
+    </div>
+    <div class="post-content">
+      <time pubdate="" datetime="{{ post.date }}" class="post-date">发布时间：</time>{% if post.date %} {{ TimeToStr(post.date) }} {% endif %}&nbsp;&nbsp;&nbsp;&nbsp;分类：<a href="/category/{{ post.croute }}.html"> {{ post.cname }} </a>&nbsp;&nbsp;&nbsp;&nbsp;阅读数：{{ post.count }} 
+    </div>
+  </article>
+  <!-- /.post -->
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="{{ post.route }}" data-title="{{ post.title }}" data-url="{{ config['DOMAIN'] }}/category/{{ post.croute }}.html"></div>
+  <!-- 多说评论框 end -->
+{% endblock %}
+
+{% block scripts %}
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"#youname#"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+{% endblock %}

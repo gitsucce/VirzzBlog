@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html lang="" >
+  <head>
+    <base href="{{config['HOST']}}/">
+    <title>{% if pagetitle %}{{pagetitle}} -- {% endif %}{{get_config('rootuser')}}'s Blog</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="天行健，君子以自强不息；地势坤，君子以厚德载物。" />
+    <meta name="keywords" content="信息,安全,黑客,白帽,技术,审计,代码,CTF,writeup,漏洞" />
+    <meta name="author" content="Virink">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    {% if get_config('meta_html') %}{{ get_config('meta_html') | safe}}{% endif %}
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block stylesheets %}
+    {% endblock %}
+    <!-- html5.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- css3-mediaqueries.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+          <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+  </head>
+  <body>
+    <div class="book with-summary">
+      <!-- Summary -->
+      <div class="book-summary">
+        <!-- Search -->
+        <div role="search" id="book-search-input">
+          <form action="/search" method="get" id="searchform">
+            <input type="search" placeholder="Type to search" name="search" id="s">
+          </form>
+        </div>
+        <nav role="navigation">
+          <ul class="summary">
+            <li>
+              <a href="{{config['HOST']}}" class="site-title"><h1> {{get_config('rootuser')}}'s Blog </h1></a>
+            </li>
+            <li class="divider"></li>
+            <li class="chapter">
+              <a title="關於我" href="/about.html">About Me</a>
+            </li>
+            <li class="divider"></li>
+            <li class="chapter">
+              <a title="RSS订阅" href="/feed"> RSS订阅 </a>
+            </li>
+            <li class="divider"></li>
+            <li class="chapter ">
+              <span>文章分類</span>
+              <ul class="articles">
+                {% for category in webcategorys() %}
+                <li class="chapter "><a href="/category/{{ category.route }}.html">{{ category.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <!-- Links -->
+            <li class="chapter ">
+              <span>友情鏈接</span>
+              <ul class="articles">
+                {% for link in weblinks() %}
+                <li class="chapter "><a target="_blank" title="{{ link.title }}" href="/jumpto/virzz{{ link.id }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="chapter ">
+              <ul class="articles">
+                <li class="chapter "><a href="http://www.virzz.com" target="blank"> Copyright ©2016 Virink </a></li>
+                <li class="chapter "><a href="http://www.miitbeian.gov.cn" target="blank"> 京ICP备15061804号 </a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Body -->
+      <div class="book-body">
+        <div class="body-inner">
+          <!-- navigation -->
+          <div role="navigation" class="book-header">
+            <!-- summary -->
+            <a id="tm" class="btn pull-left js-toolbar-action"><i class="fa fa-align-justify"></i></a>
+            <!-- share -->
+            <a id="facebook" class="btn pull-right js-toolbar-action"><i class="fa fa-facebook"></i></a>
+            <a id="twitter" class="btn pull-right js-toolbar-action"><i class="fa fa-twitter"></i></a>
+            <a id="weibo" class="btn pull-right js-toolbar-action"><i class="fa fa-weibo"></i></a>
+            <a id="vk" class="btn pull-right js-toolbar-action"><i class="fa fa-vk"></i></a>
+            <a id="instapaper" class="btn pull-right js-toolbar-action"><i class="fa fa-instapaper"></i></a>
+            <a class="btn pull-right js-toolbar-action"><i class="fa fa-share-alt"></i></a>
+
+            <h1> <i class="fa fa-circle-o-notch fa-spin"></i><a href=".">{% if pagetitle %}{{pagetitle}}{% else %}{{get_config('rootuser')}}'s Blog{% endif %}</a> </h1>
+          </div>
+          <!-- wrapper -->
+          <div class="page-wrapper" tabindex="-1" role="main">
+            <div class="page-inner">
+              <section class="normal markdown-section">
+                {% block content %}
+                {% endblock %}
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a id="go-top" href="#" style="display: none;">Top</a> 
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/website.js"></script> 
+    <script>
+    $(".body-inner").scroll(function () {
+      var scrollTop = $(this).scrollTop();
+      if (scrollTop > 100){
+        $('#go-top').fadeIn(100);
+      }else{
+        $('#go-top').fadeOut(100);
+      }
+    });
+    if (navigator.userAgent.match(/mobile/i)) {
+      $('.book').removeClass('with-summary');
+    }
+    </script>
+    {% if get_config('tongji_code') %}{{ get_config('tongji_code') | safe}}{% endif %}
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>

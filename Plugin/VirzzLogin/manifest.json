@@ -1,0 +1,28 @@
+{
+
+    "manifest_version": 2,
+    "name": "VirzzLogin",
+    "version": "2.4",
+
+    "description": "An add-on for Virink's Blog",
+    "homepage_url": "https://www.virzz.com",
+
+    "icons": {
+        "64": "icons/icon-64.png"
+    },
+
+    "permissions": [
+        "tabs",
+        "*://www.virzz.com/*"
+    ],
+
+    "browser_action": {
+        "default_icon": "icons/icon-32.png",
+        "default_title": "VirzzLogin"
+    },
+
+    "background": {
+        "scripts": ["virzz.js"]
+    }
+
+}

@@ -1,0 +1,46 @@
+{% extends "roots/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="page-center">
+		<h1>文章列表</h1>
+	</div>
+
+	{% for i in index %}
+	<article class="post clearfix boder">
+		<span class="post-title">
+			 <a href="/{{ i.route }}.html" target="_blank"> 《{{ i.title }}》 </a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/roots/articles/{{i.id}}/editor.vir"> Editor </a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/roots/articles/{{i.id}}/delete.vir"> Delete </a>
+		</span>
+	</article>
+	{% endfor %}
+
+    {% if pages > 1 %}
+		<div class="page-center">
+		{% if curr_page != 1 %}
+			<a href="{{ request.script_root }}/index/{{ curr_page-1 }}">&lt;&lt;&lt;</a>
+		{% endif %}
+		{% for page in range(1, pages + 1) %}
+			{% if curr_page != page %}
+				<a href="{{ request.script_root }}/index/{{ page }}">{{ page }}</a>
+			{% else %}
+				<span class="current">{{page}}</span>
+			{% endif %}
+		{% endfor %}
+		{% if curr_page != pages %}
+			<a href="{{ request.script_root }}/index/{{ curr_page+1 }}">&gt;&gt;&gt;</a>
+		{% endif %}
+		</div>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="" >
+  <head>
+    <base href="{{config['HOST']}}/">
+    <title>{{pagetitle}} -- {{get_config('rootuser')}}'s Blog</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="天行健，君子以自强不息；地势坤，君子以厚德载物。">
+    <meta name="keywords" content="信息,安全,黑客,白帽,技术,审计,代码,CTF,writeup,漏洞" />
+    <meta name="author" content="Virink">
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block stylesheets %}
+    {% endblock %}
+    <!-- html5.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- css3-mediaqueries.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+          <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+  </head>
+  <body>
+    <div class="book with-summary">
+      <!-- Summary -->
+      <div class="book-summary">
+        <nav role="navigation">
+          <ul class="summary">
+            <li>
+              <a href="{{config['HOST']}}" class="site-title" target="_blank"><h1> {{get_config('rootuser')}}'s Blog </h1></a>
+            </li>
+            <li class="divider"></li>
+
+            <li class="chapter ">
+              <span style="font-size:1.5em;text-align: right;"><a href="/roots/setting.vir"> Setting </a></span>
+            </li>
+            <li class="divider"></li>
+
+            <li class="chapter ">
+              <span>分類管理</span>
+              <ul class="articles">
+                <li class="chapter "><a href="/roots/categorys.vir">分類列表</a></li>
+                <li class="chapter "><a href="/roots/categorys/add.vir">添加分類</a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+
+            <li class="chapter ">
+              <span>文章管理</span>
+              <ul class="articles">
+                <li class="chapter "><a href="/roots/articles.vir">文章列表</a></li>
+                <li class="chapter "><a href="/roots/articles/editor.vir">添加文章</a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+
+            <li class="chapter ">
+              <span>友鏈管理</span>
+              <ul class="articles">
+                <li class="chapter "><a href="/roots/links.vir">友鏈列表</a></li>
+                <li class="chapter "><a href="/roots/links/add.vir">添加友鏈</a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+
+            <li class="chapter ">
+              <ul class="articles">
+                <li class="chapter "><a href="/roots/logout.vir"> Logout </a></li>
+                <li class="chapter "><a href="http://www.virzz.com" target="_blank"> Copyright ©2016 Virink </a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Body -->
+      <div class="book-body">
+        <div class="body-inner">
+          <!-- wrapper -->
+          <div class="page-wrapper" tabindex="-1" role="main">
+            <div class="page-inner">
+              <section class="normal markdown-section">
+                {% block content %}
+                {% endblock %}
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/website.js"></script> 
+    {% block scripts %}
+    {% endblock %}
+    <script>
+    </script>
+  </body>
+</html>

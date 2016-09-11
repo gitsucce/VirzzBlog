@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+xmlns:atom="http://www.w3.org/2005/Atom"
+xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+<channel>
+<title>{{get_config('rootuser')}}'s Blog - {{get_config('rootuser')}}的博客</title>
+<link>{{ config['HOST'] }}</link>
+<author>
+    <name><![CDATA[{{get_config('rootuser')}}]]></name>
+    <email><![CDATA[virink@outlook.com]]></email>
+</author>
+<atom:link href="{{config['HOST']}}" rel="self" type="application/rss+xml" />
+<language>zh-CN</language>
+<description>天行健，君子以自强不息；地势坤，君子以厚德载物。</description>
+<lastBuildDate>{{ feed.date }}</lastBuildDate>
+<pubDate>{{ feed.date }}</pubDate>
+{% for item in items %}
+    <item>
+    <title>{{ item.title }}</title>
+    <link>{{ item.url }}</link>
+    <guid>{{ item.url }}</guid>
+    <pubDate>{{ item.date }}</pubDate>
+    <dc:creator>{{ item.creator }}</dc:creator>
+    <description><![CDATA[ {{ item.description }} ]]></description>
+    <content:encoded xml:lang="zh-CN"><![CDATA[ {{ item.content }} ]]></content:encoded>
+    </item>
+{% endfor %}
+</channel>
+</rss>
